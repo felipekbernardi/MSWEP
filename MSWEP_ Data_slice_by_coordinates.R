@@ -1,7 +1,6 @@
 # ................................................................................................#
 # ......................................MSWEP.....................................................#
-#.............................. Separation by Coordinate  ........................................#
-#................................. Time compilation ..............................................#
+#.............................. Separation by Coordinates ........................................#
 # ................................................................................................#
 
 
@@ -21,7 +20,7 @@
 library(ncdf4)
 library(RNetCDF)
 
-# 2 - Coordinates to Crop data
+# 2 - Input Coordinates to Croping data
 
 # It is necessary to input the "frame" to slice the data by coordinate.
 # the MSWEp data was built in WGS 1984 CRS. This folowing coordinates is the Latin america frame  #
