@@ -58,14 +58,20 @@ files = list.files(data_directory) # list of MSWEP files
     # It will only extract values by the coordinates defined by the LonIdx. 
     lat2 = ncdim_def("latitude", "degrees", file$lat[LatIdx]) # y coordinates - Latitudes - same way!
     time = ncdim_def("Time","Days after 1899-12-31", file$time, unlim=TRUE) # extract all time serie
-    Precip = ncdim_def("Precipitation", "mm/3h", file$precipitation[LonIdx,LatIdx,]) # extract precipitation
-    # It is important to perhaps the Longitude and Latitude indexes in array and the empty space to collect 
-    # all precipitation by the time[LonIdx,LatIdx,])
     var_precipitation = ncvar_def(name = "Precipitation", units = "mm/3h", 
-                                  dim = list(lon1, lat2, time), missval = NA, 
+                                  dim = list(lon1, lat2, time, Precip), missval = -999, 
                                   longname="MSWEP_data_for_latin_america")
     # The Variable creation in memory. It is a preliminary set to file creation. 
-   
-    nc_create(filename, list(var_precipitation))# Storage in the disc - it takes a long time too.
+    nc_output = nc_create(filename, list(var_precipitation))# Storage in the disc - it takes a long time too.
+    
+    # Puting the precipitation in nc File
+    Precip = file$precipitation[LonIdx,LatIdx,] # extract precipitation
+    # It is important to perhaps the Longitude and Latitude indexes in array and the empty space to collect 
+    # all precipitation by the time[LonIdx,LatIdx,])
+    ncvar_put(nc_output, var_precipitation, Precip, start=c(1,1,1))
+
+   close.nc(file_nc)
+   nc_close(nc_output) # different Libraries!
+
   }
     
