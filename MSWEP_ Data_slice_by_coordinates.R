@@ -34,7 +34,8 @@ right = -26.27 # Latin America
 # 3 - Input and output  Directory
 # Seting The Local Directory
 data_directory = choose.dir(caption = "Choose MSWEP data directory") # MSWEP data directory
-data_ex_directory = choose.dir(caption = "Choose Output directory,it must be different of MSWEP data directory") # Output directory, must be different of data_directory.
+data_ex_directory = choose.dir(caption = "Choose Output directory,it must be different of MSWEP data directory")
+# Output directory, must be different of data_directory.
 
 files = list.files(data_directory) # list of MSWEP files
 
@@ -60,7 +61,9 @@ files = list.files(data_directory) # list of MSWEP files
     Precip = ncdim_def("Precipitation", "mm/3h", file$precipitation[LonIdx,LatIdx,]) # extract precipitation
     # It is important to perhaps the Longitude and Latitude indexes in array and the empty space to collect 
     # all precipitation by the time[LonIdx,LatIdx,])
-    var_precipitation = ncvar_def(name = "Precipitation", units = "mm/3h", dim = list(lon1, lat2, time), missval = NA, longname="MSWEP_data_for_latin_america")
+    var_precipitation = ncvar_def(name = "Precipitation", units = "mm/3h", 
+                                  dim = list(lon1, lat2, time), missval = NA, 
+                                  longname="MSWEP_data_for_latin_america")
     # The Variable creation in memory. It is a preliminary set to file creation. 
    
     nc_create(filename, list(var_precipitation))# Storage in the disc - it takes a long time too.
