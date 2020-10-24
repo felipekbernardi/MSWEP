@@ -24,7 +24,7 @@ library(lubridate)
 # 2. MSWEP Data
 # ............................... Selection by raster.............................................#
 # Multi-Source Weighted-Ensemble Precipitation (MSWEP) is a fully global historical precipitation #
-# dataset (1979-2019) with a 3-hourly temporal and 0.1° spatial resolution(http://www.gloh2o.org/ #
+# dataset (1979-2019) with a 3-hourly temporal and 0.1Â° spatial resolution(http://www.gloh2o.org/ #
 # This data is available in netCDF file and monthly separeted data. These data was dowloaded from #
 # http://hydrology.princeton.edu/. 
 
@@ -62,7 +62,8 @@ left = round(xmin(Map_extend),1)-0.2
 right = round(xmin(Map_extend),1)+0.2
 
 # 4. Masking and grouping data
-# The MSWEP data can be read, one by one, and can be selected the grid to mask the data         #
+# The MSWEP data can be read, one by one, and can be selected the grid to mask the data and it   #
+# will be separated by coordinates (long, lat). So, the output colunm names will be lon x lat    #
 
 for(k in 1:length(files)){ # run to all files in the directory  
   file_directory = paste0(Data_directory,"\\",files[k]) # MSWEP directory
@@ -160,7 +161,7 @@ for(k in 1:length(files)){ # run to all files in the directory
   close.nc(file_nc)# Closing to not broken!
 } # end main for (files)
 
-
+write.csv(grouped_data, choose.files(caption = "Create the output file. Dont forget the '.csv' extention"),row.names = F)
 
 
 
