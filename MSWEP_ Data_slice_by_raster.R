@@ -57,9 +57,9 @@ Map_extend = extent(map) # Extract map extention
 # Extracting the Raser Limits
 # Top, Botton, Left and Right
 top = round(ymax(Map_extend),1)+0.2
-botton = round(ymax(Map_extend),1)-0.2
+botton = round(ymin(Map_extend),1)-0.2
 left = round(xmin(Map_extend),1)-0.2
-right = round(xmin(Map_extend),1)+0.2
+right = round(xmax(Map_extend),1)+0.2
 
 # 4. Masking and grouping data
 # The MSWEP data can be read, one by one, and can be selected the grid to mask the data and it   #
